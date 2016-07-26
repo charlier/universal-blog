@@ -57,7 +57,7 @@ function mapStateToProps(state) {
 }
 
 Post.propTypes = {
-	params: React.PropTypes.array,
+	params: React.PropTypes.object,
   post: React.PropTypes.object,
 	dispatch: React.PropTypes.func
 };

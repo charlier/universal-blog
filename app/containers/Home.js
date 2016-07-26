@@ -63,7 +63,7 @@ function mapStateToProps(state) {
 
 Home.propTypes = {
 	dispatch: React.PropTypes.func,
-  posts: React.PropTypes.array
+	posts: React.PropTypes.object
 };
 
 export default connect(mapStateToProps)(Home);
