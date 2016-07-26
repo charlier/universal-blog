@@ -23,25 +23,25 @@ class Home extends Component {
 
     if (posts.readyState === PostsActions.POSTS_INVALID ||
       posts.readyState === PostsActions.POSTS_FETCHING) {
-      return <p id="loading">Loading</p>;
+        return <p id="loading">Loading</p>;
+      }
+
+      if (posts.readyState === PostsActions.POSTS_FETCH_FAILED) {
+        return <p>Failed to fetch posts</p>;
+      }
+
+      return <ListPost posts={posts.list} />;
     }
 
-    if (posts.readyState === PostsActions.POSTS_FETCH_FAILED) {
-      return <p>Failed to fetch posts</p>;
-    }
-
-    return <ListPost posts={posts.list} />;
-  }
-
-  render() {
-    return (
-      <div>
+    render() {
+      return (
+        <div>
         <Helmet
-          title='Charlie Rogers | Full-Stack Developer'
-          meta={[
-            {'name': 'keywords', 'content': 'charlie rogers, charles rogers, charles a rogers, charlie a rogers, charlesrogers, charlierogers'},
-            {'name': 'description', 'content': 'Charlie Rogers is a Technical Lead and Full-Stack Developer. Providing quality user experience through responsive design.'}
-          ]}
+        title='Charlie Rogers | Full-Stack Developer'
+        meta={[
+          {'name': 'keywords', 'content': 'charlie rogers, charles rogers, charles a rogers, charlie a rogers, charlesrogers, charlierogers'},
+          {'name': 'description', 'content': 'Charlie Rogers is a Technical Lead and Full-Stack Developer. Providing quality user experience through responsive design.'}
+        ]}
         />
         <h1>charlie.im</h1>
         <p>Hi! I&rsquo;m <strong>Charlie Rogers</strong>, a Full-Stack Developer with experience in creating some of the most loved websites in the <abbr title="United Kingdom">UK</abbr>.<br />
@@ -50,20 +50,20 @@ class Home extends Component {
         <hr />
         <h2>Recent Posts:</h2>
         {this.renderPosts()}
-      </div>
-    );
+        </div>
+      );
+    }
   }
-}
 
-function mapStateToProps(state) {
-  return {
-    posts: state.posts
+  function mapStateToProps(state) {
+    return {
+      posts: state.posts
+    };
+  }
+
+  Home.propTypes = {
+    dispatch: React.PropTypes.func,
+    posts: React.PropTypes.object
   };
-}
 
-Home.propTypes = {
-	dispatch: React.PropTypes.func,
-	posts: React.PropTypes.object
-};
-
-export default connect(mapStateToProps)(Home);
+  export default connect(mapStateToProps)(Home);

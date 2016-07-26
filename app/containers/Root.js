@@ -21,27 +21,27 @@ class Root extends Component {
 
     return (
       <html lang='en-GB'>
-        <head>
-          {head.title.toComponent()}
-          {head.meta.toComponent()}
-          {head.link.toComponent()}
-        </head>
-        <body>
-          <div id='root' dangerouslySetInnerHTML={{__html: this.props.content}} />
-          {this.renderEnvironment()}
-          {this.renderInitialState()}
-          {head.script.toComponent()}
-          <script src={!config.env ? '/app.js' : `${config.staticHost}/app.min.js`}></script>
-        </body>
+      <head>
+      {head.title.toComponent()}
+      {head.meta.toComponent()}
+      {head.link.toComponent()}
+      </head>
+      <body>
+      <div id='root' dangerouslySetInnerHTML={{__html: this.props.content}} />
+      {this.renderEnvironment()}
+      {this.renderInitialState()}
+      {head.script.toComponent()}
+      <script src={!config.env ? '/app.js' : `${config.staticHost}/app.min.js`}></script>
+      </body>
       </html>
     );
   }
 }
 
 Root.propTypes = {
-	initialState: React.PropTypes.object,
+  initialState: React.PropTypes.object,
   content: React.PropTypes.string,
-	head: React.PropTypes.string
+  head: React.PropTypes.string
 };
 
 export default Root;

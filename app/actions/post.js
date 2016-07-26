@@ -10,16 +10,16 @@ function fetchPost (postId) {
     dispatch({ type: POST_FETCHING, postId })
 
     return fetch(`${config.apiHost}/post/${postId}`)
-      .then((response) => {
-        if (response.status >= 400) {
-          throw new Error('Bad response from server')
-        }
-        return response.json()
-      })
-			.then(
-				(result) => dispatch({ type: POST_FETCHED, postId, result }),
-				(error) => dispatch({ type: POST_FETCH_FAILED, postId, error })
-			)
+    .then((response) => {
+      if (response.status >= 400) {
+        throw new Error('Bad response from server')
+      }
+      return response.json()
+    })
+    .then(
+      (result) => dispatch({ type: POST_FETCHED, postId, result }),
+      (error) => dispatch({ type: POST_FETCH_FAILED, postId, error })
+    )
   }
 }
 
@@ -27,18 +27,18 @@ function shouldFetchPost (state, postId) {
   const post = state.post[postId]
 
   if (!post ||
-		post.readyState === POST_FETCH_FAILED ||
-		post.readyState === POST_INVALID) {
-    return true
+    post.readyState === POST_FETCH_FAILED ||
+    post.readyState === POST_INVALID) {
+      return true
+    }
+
+    return false
   }
 
-  return false
-}
-
-export function fetchPostIfNeeded (postId) {
-  return (dispatch, getState) => {
-    if (shouldFetchPost(getState(), postId)) {
-      return dispatch(fetchPost(postId))
+  export function fetchPostIfNeeded (postId) {
+    return (dispatch, getState) => {
+      if (shouldFetchPost(getState(), postId)) {
+        return dispatch(fetchPost(postId))
+      }
     }
   }
-}
