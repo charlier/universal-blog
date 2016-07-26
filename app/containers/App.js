@@ -23,8 +23,8 @@ class App extends Component {
 						{'name': 'twitter:site', 'content': '@charlierogers'}
 					]}
           link={[
-						{'rel': 'shortcut icon', 'href': config.staticHost + '/favicon.ico', 'type': 'image/x-icon'},
-            config.env ? {'rel': 'stylesheet', 'href': config.staticHost + '/style.min.css'} : {}
+						{'rel': 'shortcut icon', 'href': `${config.staticHost}/favicon.ico`, 'type': 'image/x-icon'},
+            config.env ? {'rel': 'stylesheet', 'href': `${config.staticHost}/style.min.css`} : {}
           ]}
 				/>
 				<nav>

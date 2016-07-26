@@ -9,7 +9,7 @@ function fetchPosts() {
 	return (dispatch) => {
 		dispatch({ type: POSTS_FETCHING });
 
-		return fetch(config.apiHost + '/posts')
+		return fetch(`${config.apiHost}/posts`)
 			.then((response) => {
 				return response.json();
 			})

@@ -2,7 +2,6 @@ require('babel-core/register');
 require.extensions['.scss'] = function() {
     return;
 };
-
 const path = require('path');
 const express = require('express');
 const webpack = require('webpack');
@@ -12,7 +11,6 @@ const config = require('./webpack.config.js');
 const port = process.env.PORT || 3000;
 const server = express();
 global.__ENVIRONMENT__ = process.env.NODE_ENV || 'default';
-var __dirname = path.resolve();
 
 // Otherwise errors thrown in Promise routines will be silently swallowed.
 // (e.g. any error during rendering the app server-side!)
@@ -26,12 +24,12 @@ process.on('unhandledRejection', (reason, p) => {
 
 // Short-circuit the browser's annoying favicon request. You can still
 // specify one as long as it doesn't have this exact name and path.
-server.get('/favicon.ico', function(req, res) {
+server.get('/favicon.ico', (req, res) => {
     res.writeHead(200, { 'Content-Type': 'image/x-icon' });
     res.end();
 });
 
-server.use(express.static(path.resolve(__dirname, 'dist'), { maxAge: 31536000000 }));
+server.use(express.static(path.join(__dirname, '/dist'), { maxAge: 31536000000 }));
 
 if (!process.env.NODE_ENV) {
     const compiler = webpack(config);

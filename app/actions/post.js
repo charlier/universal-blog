@@ -7,9 +7,9 @@ export const POST_FETCH_FAILED = 'POST_FETCH_FAILED'
 
 function fetchPost (postId) {
   return (dispatch) => {
-    dispatch({ type: POST_FETCHING, postId: postId })
+    dispatch({ type: POST_FETCHING, postId })
 
-    return fetch(config.apiHost + '/post/' + postId)
+    return fetch(`${config.apiHost}/post/${postId}`)
       .then((response) => {
         if (response.status >= 400) {
           throw new Error('Bad response from server')
@@ -17,8 +17,8 @@ function fetchPost (postId) {
         return response.json()
       })
 			.then(
-				(result) => dispatch({ type: POST_FETCHED, postId: postId, result }),
-				(error) => dispatch({ type: POST_FETCH_FAILED, postId: postId, error })
+				(result) => dispatch({ type: POST_FETCHED, postId, result }),
+				(error) => dispatch({ type: POST_FETCH_FAILED, postId, error })
 			)
   }
 }

@@ -31,7 +31,7 @@ class Root extends Component {
           {this.renderEnvironment()}
           {this.renderInitialState()}
           {head.script.toComponent()}
-          <script src={!config.env ? '/app.js' : config.staticHost + '/app.min.js'}></script>
+          <script src={!config.env ? '/app.js' : `${config.staticHost}/app.min.js`}></script>
         </body>
       </html>
     );

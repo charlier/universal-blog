@@ -1,8 +1,7 @@
 'use strict';
-
-var path = require('path');
-var webpack = require('webpack');
-var __dirname = path.resolve();
+const path = require('path');
+const webpack = require('webpack');
+const __dirname = path.resolve();
 
 module.exports = {
 	devtool: '#source-map',

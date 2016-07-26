@@ -31,9 +31,9 @@ function renderComponentWithRoot(Component, componentProps, store) {
 	const head = Helmet.rewind();
 	const initialState = store.getState();
 
-	return '<!doctype html>\n' + renderToStaticMarkup(
-		<Root content={componentHtml} initialState={initialState} head={head} />
-	);
+	return `<!doctype html>\n${renderToStaticMarkup(
+    <Root content={componentHtml} initialState={initialState} head={head} />
+)}`;
 }
 
 function handleError(res, error) {

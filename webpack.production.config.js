@@ -1,10 +1,9 @@
 'use strict';
-
-var path = require('path');
-var webpack = require('webpack');
-var del = require('del');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var __dirname = path.resolve();
+const path = require('path');
+const webpack = require('webpack');
+const del = require('del');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const __dirname = path.resolve();
 
 class CleanPlugin {
     constructor(options) {
