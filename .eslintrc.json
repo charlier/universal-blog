@@ -1,0 +1,27 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "jsx": true
+    }
+  },
+  "globals": {
+    "fetch": false,
+    "require": false,
+    "window": false,
+    "document": false,
+    "module": false,
+    "__ENVIRONMENT__": false
+  },
+  "rules": {
+    "react/no-danger": 0
+  },
+  "env": {
+    "es6": true
+  },
+  "plugins": [
+    "react"
+  ],
+  "extends": ["eslint:recommended", "plugin:react/recommended"]
+}
