@@ -3,7 +3,6 @@ const path = require('path');
 const webpack = require('webpack');
 const del = require('del');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const __dirname = path.resolve();
 
 class CleanPlugin {
   constructor(options) {
