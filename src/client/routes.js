@@ -10,9 +10,15 @@ export default [
     chunkName: 'pages/about'
   },
   {
-    path: '/article/:title',
+    path: '/wiki/:title',
     page: () =>
-      import(/* webpackChunkName: "pages/article" */ './pages/article'),
-    chunkName: 'pages/article'
+      import(/* webpackChunkName: "pages/wiki" */ './pages/wiki'),
+    chunkName: 'pages/wiki'
+  },
+  {
+    path: '/github/:user',
+    page: () =>
+      import(/* webpackChunkName: "pages/github" */ './pages/github'),
+    chunkName: 'pages/github'
   }
 ];

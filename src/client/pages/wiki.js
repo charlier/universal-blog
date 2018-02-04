@@ -1,9 +1,8 @@
 import { Component, h } from 'preact';
-import fetch from 'isomorphic-unfetch';
 
 import App from '../components/app';
 
-export default class Article extends Component {
+export default class Wiki extends Component {
   static getInitialProps({ params: { title } }) {
     return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${title}`)
       .then((res) => res.json())
