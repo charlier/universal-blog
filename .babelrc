@@ -5,7 +5,8 @@
 		"stage-0"
 	],
 	"plugins": [
+		"async-to-promises",
 		["transform-decorators-legacy"],
-		["transform-react-jsx", { "pragma": "h" }]
+		["transform-react-jsx", { "pragma": "h" }],
 	]
 }
