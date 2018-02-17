@@ -2,11 +2,10 @@
   "name": "universal-app",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
   "scripts": {
-    "start": "rm -rf dist/* && run-p -s 'compile -- -w' server",
+    "start": "run-p compile server",
     "build": "rm -rf dist/* && NODE_ENV=production webpack",
-    "compile": "webpack",
+    "compile": "webpack -w",
     "server": "nodemon -w dist dist/server/index.js"
   },
   "repository": "git+https://github.com/charlier/universal-app.git",
