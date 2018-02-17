@@ -22,9 +22,10 @@ describe('Link Component', () => {
 
   it('Adds the children content', () => {
     const preventDefault = jest.fn();
+    const props = { children: 'Link content' };
     const wrapper = deep(
       <Provider history={{ push: () => {} }}>
-        <Link {...{ children: 'Link content' }} />
+        <Link {...props} />
       </Provider>,
       { depth: 2 }
     );
@@ -34,9 +35,13 @@ describe('Link Component', () => {
 
   it('Pushes updates to the history context', () => {
     const push = jest.fn();
+    const props = {
+      children: 'Link content',
+      href: 'geoff'
+    };
     const wrapper = deep(
       <Provider history={{ push }}>
-        <Link href='geoff' {...{ children: 'Link content' }} />
+        <Link {...props} />
       </Provider>,
       { depth: 2 }
     );
