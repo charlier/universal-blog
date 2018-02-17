@@ -19,7 +19,6 @@
   },
   "homepage": "https://github.com/charlier/universal-app#readme",
   "dependencies": {
-    "babel-plugin-async-to-promises": "^1.0.5",
     "express": "^4.16.2",
     "history": "^4.7.2",
     "isomorphic-unfetch": "^2.0.0",
