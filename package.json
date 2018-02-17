@@ -76,6 +76,7 @@
     "jest-fetch-mock": "^1.4.1",
     "nodemon": "^1.14.11",
     "npm-run-all": "^4.1.2",
+    "preact-context-provider": "^1.1.1",
     "preact-render-spy": "^1.2.2",
     "source-map-loader": "^0.2.3",
     "webpack-node-externals": "^1.6.0"

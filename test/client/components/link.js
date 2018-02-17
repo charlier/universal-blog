@@ -1,5 +1,6 @@
 import { h } from 'preact';
-import { shallow } from 'preact-render-spy';
+import { shallow, deep } from 'preact-render-spy';
+import Provider from 'preact-context-provider';
 
 import Link from '../../../src/client/components/link';
 
@@ -21,10 +22,27 @@ describe('Link Component', () => {
 
   it('Adds the children content', () => {
     const preventDefault = jest.fn();
-    const context = { history: { push: jest.fn } };
-    const wrapper = shallow(<Link {...{ children: 'Link content' }} />, { context });
+    const wrapper = deep(
+      <Provider history={{ push: () => {} }}>
+        <Link {...{ children: 'Link content' }} />
+      </Provider>,
+      { depth: 2 }
+    );
     wrapper.find('a').simulate('click', { preventDefault });
     expect(preventDefault).toHaveBeenCalledTimes(1);
+  });
+
+  it('Pushes updates to the history context', () => {
+    const push = jest.fn();
+    const wrapper = deep(
+      <Provider history={{ push }}>
+        <Link href='geoff' {...{ children: 'Link content' }} />
+      </Provider>,
+      { depth: 2 }
+    );
+    wrapper.find('a').simulate('click', { preventDefault: () => {} });
+    expect(push).toHaveBeenCalledTimes(1);
+    expect(push).toHaveBeenCalledWith('geoff');
   });
 
 });
