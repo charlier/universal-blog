@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`About Page Renders the About Page 1`] = `
-preact-render-spy (1 nodes)
--------
-<UnnamedComponent0>
-  <p>This is the about page</p>
-</UnnamedComponent0>
-
-`;
-
 exports[`Index Page Renders the Index Page 1`] = `
 preact-render-spy (1 nodes)
 -------
