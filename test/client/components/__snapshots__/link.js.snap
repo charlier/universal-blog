@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Link Component Renders the Link Component 1`] = `
+preact-render-spy (1 nodes)
+-------
+<a onClick={[Function onClick]}></a>
+
+`;
