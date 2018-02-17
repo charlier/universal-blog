@@ -20,7 +20,7 @@ describe('Link Component', () => {
     expect(wrapper.find('a').text()).toBe('Link content');
   });
 
-  it('Adds the children content', () => {
+  it('Prevent the browser from following internal links', () => {
     const preventDefault = jest.fn();
     const props = { children: 'Link content' };
     const wrapper = deep(
