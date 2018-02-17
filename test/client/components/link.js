@@ -22,9 +22,10 @@ describe('Link Component', () => {
 
   it('Prevent the browser from following internal links', () => {
     const preventDefault = jest.fn();
+    const context = { history: { push: () => {} } };
     const props = { children: 'Link content' };
     const wrapper = deep(
-      <Provider history={{ push: () => {} }}>
+      <Provider {...context}>
         <Link {...props} />
       </Provider>,
       { depth: 2 }
@@ -35,12 +36,10 @@ describe('Link Component', () => {
 
   it('Pushes updates to the history context', () => {
     const push = jest.fn();
-    const props = {
-      children: 'Link content',
-      href: 'geoff'
-    };
+    const context = { history: { push } };
+    const props = { children: 'Link content', href: 'geoff' };
     const wrapper = deep(
-      <Provider history={{ push }}>
+      <Provider {...context}>
         <Link {...props} />
       </Provider>,
       { depth: 2 }
