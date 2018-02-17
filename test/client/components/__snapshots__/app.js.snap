@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App Component Renders the App Component 1`] = `
+preact-render-spy (1 nodes)
+-------
+<div>
+  <h1>Header</h1>
+  <ul>
+    <li>
+      <UnnamedComponent0 href="/">Home</UnnamedComponent0>
+    </li>
+    <li>
+      <UnnamedComponent0 href="/wiki/Banana">Wiki: Banana</UnnamedComponent0>
+    </li>
+    <li>
+      <UnnamedComponent0 href="/github/charlier">Github: charlier</UnnamedComponent0>
+    </li>
+    <li>
+      <UnnamedComponent0 href="/about">About</UnnamedComponent0>
+    </li>
+  </ul>
+  <div></div>
+</div>
+
+`;

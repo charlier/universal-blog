@@ -48,5 +48,4 @@ describe('Link Component', () => {
     expect(push).toHaveBeenCalledTimes(1);
     expect(push).toHaveBeenCalledWith('geoff');
   });
-
 });
