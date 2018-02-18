@@ -20,7 +20,8 @@ export default class Wiki extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.summary.title !== this.props.summary.title) {
+    const { summary } = this.props;
+    if (nextProps.summary.title !== summary.title) {
       this.setState({ seconds: 0 });
     }
   }
