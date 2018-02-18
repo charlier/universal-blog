@@ -11,6 +11,6 @@ describe('App Component', () => {
 
   it('Adds the children content', () => {
     const wrapper = shallow(<App {...{ children: 'App content' }} />);
-    expect(wrapper.find('div').find('div').text()).toBe('App content');
+    expect(wrapper.find('section').text()).toBe('App content');
   });
 });

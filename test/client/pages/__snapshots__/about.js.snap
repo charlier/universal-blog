@@ -4,7 +4,10 @@ exports[`About Page Renders the About Page 1`] = `
 preact-render-spy (1 nodes)
 -------
 <UnnamedComponent0>
+  <h1>About</h1>
   <p>This is the about page</p>
+  <p>Text here</p>
+  .
 </UnnamedComponent0>
 
 `;

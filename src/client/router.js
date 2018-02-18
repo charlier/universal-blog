@@ -1,4 +1,5 @@
 import ptr from 'path-to-regexp';
+import 'isomorphic-unfetch';
 
 export default (routes) => {
   const parsedRoutes = routes.map((r) => {

@@ -12,6 +12,7 @@ export default class Github extends Component {
   render({ items }) {
     return (
       <App>
+        <h1>Github</h1>
         {items.map((item) => <Item {...item} />)}
       </App>
     );

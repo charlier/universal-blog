@@ -32,6 +32,7 @@ export default class Wiki extends Component {
   render({ summary: { displaytitle, extract } }, { seconds }) {
     return (
       <App>
+        <h1>Wikipedia</h1>
         <h2>
           Article: {displaytitle}. Seconds reading {seconds}.
         </h2>
