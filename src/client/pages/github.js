@@ -1,8 +1,9 @@
-import { Component, h } from 'preact';
+import { h } from 'preact';
 
+import PureComponent from '../utils/pureComponent';
 import App from '../components/app';
 
-export default class Github extends Component {
+export default class Github extends PureComponent {
   static getInitialProps({ params: { user } }) {
     return fetch(`https://api.github.com/users/${user}/repos`)
       .then((res) => res.json())

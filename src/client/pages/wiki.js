@@ -1,8 +1,9 @@
-import { Component, h } from 'preact';
+import { h } from 'preact';
 
+import PureComponent from '../utils/pureComponent';
 import App from '../components/app';
 
-export default class Wiki extends Component {
+export default class Wiki extends PureComponent {
   static getInitialProps({ params: { title } }) {
     return fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${title}`)
       .then((res) => res.json())
