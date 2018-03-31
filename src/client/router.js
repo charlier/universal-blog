@@ -25,9 +25,10 @@ export default (routes) => {
 
           return route.page().then((m) => {
             let initialProps = null;
-            if (typeof window !== 'undefined' && window.INITIAL_PROPS) {
-              initialProps = Promise.resolve(window.INITIAL_PROPS);
-              window.INITIAL_PROPS = undefined;
+            if (typeof document !== 'undefined' && document.getElementById('root').getAttribute('data-props')) {
+              const props = JSON.parse(document.getElementById('root').getAttribute('data-props'));
+              initialProps = Promise.resolve(props);
+              document.getElementById('root').removeAttribute('data-props');
             } else if (m.default && m.default.getInitialProps) {
               initialProps = m.default.getInitialProps({ params });
             } else {

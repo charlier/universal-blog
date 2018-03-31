@@ -6,6 +6,8 @@ import createRouter from './router';
 const root = document.getElementById('root');
 const history = (window.h = createHistory());
 const router = createRouter(routes);
+window.webpackManifest = JSON.parse(root.getAttribute('data-manifest'));
+root.removeAttribute('data-manifest');
 history.listen(() => init());
 
 const init = () => {

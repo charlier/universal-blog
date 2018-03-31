@@ -33,11 +33,9 @@ const tpl = ({ pageChunkName, initialProps, html = '' }) => {
     .join('\n')}
   </head>
   <body>
-    <div id="root">${html}</div>
-    <script type="text/javascript">
-    window.webpackManifest = ${JSON.stringify(chunkManifest)}
-    window.INITIAL_PROPS = ${JSON.stringify(initialProps)}
-    </script>
+  <div id="root" 
+    data-manifest = '${JSON.stringify(chunkManifest)}'
+    data-props='${JSON.stringify(initialProps)}'>${html}</div>
     ${scriptsToLoad
     .map((s) => `<script type="text/javascript" src="${s}"></script>`)
     .join('\n')}
