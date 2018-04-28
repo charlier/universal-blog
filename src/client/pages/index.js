@@ -1,9 +1,11 @@
 import { h } from 'preact';
+import Helmet from 'preact-helmet';
 
 import App from '../components/app';
 
 export default () => (
   <App>
+    <Helmet title="My Title" />
     <h1>charlie.im</h1>
     <p>
       Hi! I’m Charlie Rogers, a Full-Stack Developer with experience in creating some of the most loved websites in the <abbr title="United Kingdom">UK</abbr>.<br />

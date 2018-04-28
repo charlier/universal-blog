@@ -42,8 +42,7 @@ export default (routes) => {
                 url,
                 params,
                 ...props
-              },
-              initialProps: props
+              }
             }));
           });
         }

@@ -1,9 +1,22 @@
 import { h } from 'preact';
+import Helmet from 'preact-helmet';
 
 import Link from '../link';
 
 export default ({ children }) => (
   <div>
+    <Helmet title='Title not set :('
+      titleTemplate='charlie.im - %s'
+      meta={[
+        { 'char-set': 'utf-8' },
+        { 'http-equiv': 'x-ua-compatible', content: 'ie=edge' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { name: 'og:type', content: 'website' },
+        { name: 'og:site_name', content: 'charlie.im' },
+        { name: 'twitter:creator', content: '@charlierogers' },
+        { name: 'twitter:site', content: '@charlierogers' }
+      ]}
+    />
     <nav>
       <ul>
         <li>

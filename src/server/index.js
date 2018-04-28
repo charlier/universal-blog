@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { h } from 'preact';
 import render from 'preact-render-to-string';
+import Helmet from 'preact-helmet';
 
 import routes from '../client/routes';
 import createRouter from '../client/router';
@@ -18,41 +19,42 @@ server.listen(port);
 
 const router = createRouter(routes);
 
-const tpl = ({ pageChunkName, initialProps, html = '' }) => {
-  const scriptsToLoad = [assetsManifest['index'].js, assetsManifest[pageChunkName].js];
-  return `
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="x-ua-compatible" content="ie=edge" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Title</title>
-  ${scriptsToLoad
-    .map((s) => `<link rel="preload" href="${s}" as="script">`)
-    .join('\n')}
-  </head>
-  <body>
-  <div id="root" 
-    data-manifest = '${JSON.stringify(chunkManifest)}'
-    data-props='${JSON.stringify(initialProps)}'>${html}</div>
-    ${scriptsToLoad
-    .map((s) => `<script type="text/javascript" src="${s}"></script>`)
-    .join('\n')}
-  </body>
-</html>`;
+const tpl = ({ chunkName, Page, props }) => {
+
+  const scriptsToLoad = [assetsManifest['index'].js, assetsManifest[chunkName].js];
+  const script = scriptsToLoad.map((src) => ({ src, type: 'text/javascript' }));
+  render(<Helmet script={script} />);
+  const head = Helmet.rewind();
+
+  const attrs = head.htmlAttributes.toComponent();
+  return (
+    <html {...attrs}>
+      <head>
+        {head.title.toComponent()}
+        {head.meta.toComponent()}
+      </head>
+      <body>
+        <div id="root"
+          data-manifest={JSON.stringify(chunkManifest)}
+          data-props={JSON.stringify(props)}>
+          <Page {...props} />
+        </div>
+        {head.script.toComponent()}
+      </body>
+    </html>
+  );
 };
 
 server.get('*', ({ url }, res) =>
   router
     .match(url)
-    .then(({ chunkName, Page, props, initialProps }) =>
+    .then(({ chunkName, Page, props }) =>
       res.status(200).send(
-        tpl({
-          pageChunkName: chunkName,
-          initialProps,
-          html: render(<Page {...props} />)
-        })
+        render(tpl({
+          chunkName,
+          Page,
+          props
+        }))
       )
     )
     .catch((e) => res.status(404).send(e.message))

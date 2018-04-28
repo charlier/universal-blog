@@ -1,5 +1,6 @@
 import { render, Component, h } from 'preact';
 import createHistory from 'history/createBrowserHistory';
+
 import routes from './routes';
 import createRouter from './router';
 
