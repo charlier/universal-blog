@@ -10,6 +10,7 @@ if (cluster.isMaster) {
   cluster.on('exit', () => cluster.fork());
 } else {
   const server = express();
+  server.disable('x-powered-by');
   server.use(express.static('./dist/client'));
   const port = process.env.PORT || 3000;
   server.listen(port);
