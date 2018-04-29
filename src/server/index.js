@@ -1,61 +1,17 @@
+import cluster from 'cluster';
 import express from 'express';
-import fs from 'fs';
-import path from 'path';
-import { h } from 'preact';
-import render from 'preact-render-to-string';
-import Helmet from 'preact-helmet';
+import os from 'os';
 
-import routes from '../client/routes';
-import createRouter from '../client/router';
+import App from './app';
 
-const readJSON = (p) => JSON.parse(fs.readFileSync(path.resolve(p)).toString());
-const assetsManifest = readJSON('dist/client/assets-manifest.json');
-const chunkManifest = readJSON('dist/client/chunk-manifest.json');
-
-const server = express();
-server.use(express.static('./dist/client'));
-const port = process.env.PORT || 3000;
-server.listen(port);
-
-const router = createRouter(routes);
-
-const tpl = ({ chunkName, Page, props }) => {
-
-  const scriptsToLoad = [assetsManifest['index'].js, assetsManifest[chunkName].js];
-  const script = scriptsToLoad.map((src) => ({ src, type: 'text/javascript' }));
-  render(<Helmet script={script} />);
-  const head = Helmet.rewind();
-
-  const attrs = head.htmlAttributes.toComponent();
-  return (
-    <html {...attrs}>
-      <head>
-        {head.title.toComponent()}
-        {head.meta.toComponent()}
-      </head>
-      <body>
-        <div id="root"
-          data-manifest={JSON.stringify(chunkManifest)}
-          data-props={JSON.stringify(props)}>
-          <Page {...props} />
-        </div>
-        {head.script.toComponent()}
-      </body>
-    </html>
-  );
-};
-
-server.get('*', ({ url }, res) =>
-  router
-    .match(url)
-    .then(({ chunkName, Page, props }) =>
-      res.status(200).send(
-        render(tpl({
-          chunkName,
-          Page,
-          props
-        }))
-      )
-    )
-    .catch((e) => res.status(404).send(e.message))
-);
+if (cluster.isMaster) {
+  const cpus = os.cpus();
+  cpus.forEach(() => cluster.fork());
+  cluster.on('exit', () => cluster.fork());
+} else {
+  const server = express();
+  server.use(express.static('./dist/client'));
+  const port = process.env.PORT || 3000;
+  server.listen(port);
+  server.get('*', App);
+}
