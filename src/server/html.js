@@ -11,7 +11,7 @@ const chunkManifest = readJSON('dist/client/chunk-manifest.json');
 const html = ({ chunkName, Page, props }) => {
   const scriptsToLoad = [assetsManifest['index'].js, assetsManifest[chunkName].js];
   const script = scriptsToLoad.map((src) => ({ src, type: 'text/javascript' }));
-  render(<Helmet script={script} />);
+  render(<Helmet {...{ script }} />);
   const head = Helmet.rewind();
   const attrs = head.htmlAttributes.toComponent();
   return (

@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
   "plugins": ["react", "jest"],
-  "extends": ["iplayer-jsx/react"],
+  "extends": ["iplayer-jsx"],
   "env": {
     "browser": true,
     "node": true,
