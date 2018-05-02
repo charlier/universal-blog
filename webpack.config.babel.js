@@ -3,6 +3,7 @@ import webpack from 'webpack';
 import nodeExternals from 'webpack-node-externals';
 import AssetsPlugin from 'assets-webpack-plugin';
 import ChunkManifestPlugin from 'chunk-manifest-webpack-plugin';
+import UglifyJSPlugin from 'uglifyjs-webpack-plugin';
 
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -45,60 +46,63 @@ const commonModules = {
   ]
 };
 
-module.exports = [
-  {
-    target: 'web',
-    context: path.resolve(__dirname, 'src'),
-    entry: {
-      index: './client/index.js'
-    },
-    output: {
-      publicPath: '/',
-      path: path.resolve(__dirname, 'dist', 'client'),
-      chunkFilename: '[name].[chunkhash].js',
-      filename: '[name].[chunkhash].js'
-    },
-    resolve: commonResolves,
-    module: commonModules,
-    plugins: commonPlugins
-      .concat([
-        new AssetsPlugin({
-          prettyPrint: true,
-          filename: 'assets-manifest.json',
-          path: path.resolve(__dirname, 'dist', 'client')
-        }),
-        new ChunkManifestPlugin({
-          filename: 'chunk-manifest.json',
-          manifestVariable: 'webpackManifest'
-        }),
-        new webpack.NamedModulesPlugin(),
-        new webpack.NamedChunksPlugin((chunk) => {
-          if (chunk.name) {
-            return chunk.name;
-          }
-          return chunk
-            .mapModules((m) => path.relative('./', m.userRequest))
-            .join('_');
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-          sourceMap: !isProd
-        })
-      ])
+module.exports = {
+  mode: (isProd ? 'production' : 'development'),
+  target: 'web',
+  context: path.resolve(__dirname, 'src'),
+  entry: {
+    index: './client/index.js'
   },
-  {
-    target: 'node',
-    context: path.resolve(__dirname, 'src'),
-    entry: { index: './server/index.js' },
-    output: {
-      path: path.resolve(__dirname, 'dist', 'server'),
-      chunkFilename: '[name].js',
-      filename: '[name].js'
-    },
-    resolve: commonResolves,
-    module: commonModules,
-    plugins: commonPlugins,
-    externals: nodeExternals({
-      whitelist: /\.css$/
-    })
-  }
-];
+  output: {
+    publicPath: '/',
+    path: path.resolve(__dirname, 'dist', 'client'),
+    chunkFilename: '[name].[chunkhash].js',
+    filename: '[name].[chunkhash].js'
+  },
+  optimization: {
+    minimizer: [
+      new UglifyJSPlugin({
+        uglifyOptions: { sourceMap: !isProd }
+      })
+    ]
+  },
+  resolve: commonResolves,
+  module: commonModules,
+  plugins: commonPlugins
+    .concat([
+      new AssetsPlugin({
+        prettyPrint: true,
+        filename: 'assets-manifest.json',
+        path: path.resolve(__dirname, 'dist', 'client')
+      }),
+      new ChunkManifestPlugin({
+        filename: 'chunk-manifest.json',
+        manifestVariable: 'webpackManifest'
+      }),
+      new webpack.NamedModulesPlugin(),
+      new webpack.NamedChunksPlugin((chunk) => {
+        if (chunk.name) {
+          return chunk.name;
+        }
+        return chunk
+          .mapModules((m) => path.relative('./', m.userRequest))
+          .join('_');
+      })
+    ])
+},
+{
+  target: 'node',
+  context: path.resolve(__dirname, 'src'),
+  entry: { index: './server/index.js' },
+  output: {
+    path: path.resolve(__dirname, 'dist', 'server'),
+    chunkFilename: '[name].js',
+    filename: '[name].js'
+  },
+  resolve: commonResolves,
+  module: commonModules,
+  plugins: commonPlugins,
+  externals: nodeExternals({
+    whitelist: /\.css$/
+  })
+}
