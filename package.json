@@ -6,7 +6,7 @@
     "start": "run-p compile server",
     "build": "rm -rf dist/* && NODE_ENV=production webpack",
     "compile": "webpack -w",
-    "server": "nodemon -w dist dist/server/index.js",
+    "server": "node dist/server/index.js",
     "test": "npm run -s lint && npm run -s test:coverage",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --notify",

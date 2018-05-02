@@ -15,8 +15,7 @@ const router = createRouter(routes);
 const tpl = ({ chunkName, Page, props }) => {
   const scriptsToLoad = [assetsManifest['index'].js, assetsManifest[chunkName].js];
   const script = scriptsToLoad.map((src) => ({ src, type: 'text/javascript' }));
-  render(<Helmet script={script} />);
-  const head = Helmet.rewind();
+  const head = Helmet({ script }).renderStatic();
   const attrs = head.htmlAttributes.toComponent();
   return (
     <html {...attrs}>
