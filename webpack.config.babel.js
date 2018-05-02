@@ -46,63 +46,71 @@ const commonModules = {
   ]
 };
 
-module.exports = {
-  mode: (isProd ? 'production' : 'development'),
-  target: 'web',
-  context: path.resolve(__dirname, 'src'),
-  entry: {
-    index: './client/index.js'
-  },
-  output: {
-    publicPath: '/',
-    path: path.resolve(__dirname, 'dist', 'client'),
-    chunkFilename: '[name].[chunkhash].js',
-    filename: '[name].[chunkhash].js'
-  },
-  optimization: {
-    minimizer: [
-      new UglifyJSPlugin({
-        uglifyOptions: { sourceMap: !isProd }
-      })
-    ]
-  },
-  resolve: commonResolves,
-  module: commonModules,
-  plugins: commonPlugins
-    .concat([
-      new AssetsPlugin({
-        prettyPrint: true,
-        filename: 'assets-manifest.json',
-        path: path.resolve(__dirname, 'dist', 'client')
-      }),
-      new ChunkManifestPlugin({
-        filename: 'chunk-manifest.json',
-        manifestVariable: 'webpackManifest'
-      }),
-      new webpack.NamedModulesPlugin(),
-      new webpack.NamedChunksPlugin((chunk) => {
-        if (chunk.name) {
-          return chunk.name;
-        }
-        return chunk
-          .mapModules((m) => path.relative('./', m.userRequest))
-          .join('_');
-      })
-    ])
-},
-{
-  target: 'node',
-  context: path.resolve(__dirname, 'src'),
-  entry: { index: './server/index.js' },
-  output: {
-    path: path.resolve(__dirname, 'dist', 'server'),
-    chunkFilename: '[name].js',
-    filename: '[name].js'
-  },
-  resolve: commonResolves,
-  module: commonModules,
-  plugins: commonPlugins,
-  externals: nodeExternals({
-    whitelist: /\.css$/
-  })
+const commonOptimizations = {
+  minimizer: [
+    new UglifyJSPlugin({
+      uglifyOptions: { sourceMap: !isProd }
+    })
+  ]
 }
+
+const mode = (isProd ? 'production' : 'development');
+
+module.exports = [
+  {
+    mode,
+    target: 'web',
+    context: path.resolve(__dirname, 'src'),
+    entry: {
+      index: './client/index.js'
+    },
+    output: {
+      publicPath: '/',
+      path: path.resolve(__dirname, 'dist', 'client'),
+      chunkFilename: '[name].[chunkhash].js',
+      filename: '[name].[chunkhash].js'
+    },
+    optimization: commonOptimizations,
+    resolve: commonResolves,
+    module: commonModules,
+    plugins: commonPlugins
+      .concat([
+        new AssetsPlugin({
+          prettyPrint: true,
+          filename: 'assets-manifest.json',
+          path: path.resolve(__dirname, 'dist', 'client')
+        }),
+        new ChunkManifestPlugin({
+          filename: 'chunk-manifest.json',
+          manifestVariable: 'webpackManifest'
+        }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.NamedChunksPlugin((chunk) => {
+          if (chunk.name) {
+            return chunk.name;
+          }
+          return chunk
+            .mapModules((m) => path.relative('./', m.userRequest))
+            .join('_');
+        })
+      ])
+  },
+  {
+    mode,
+    target: 'node',
+    context: path.resolve(__dirname, 'src'),
+    entry: { index: './server/index.js' },
+    output: {
+      path: path.resolve(__dirname, 'dist', 'server'),
+      chunkFilename: '[name].js',
+      filename: '[name].js'
+    },
+    optimization: commonOptimizations,
+    resolve: commonResolves,
+    module: commonModules,
+    plugins: commonPlugins,
+    externals: nodeExternals({
+      whitelist: /\.css$/
+    })
+  }
+]
