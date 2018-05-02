@@ -1,17 +1,17 @@
-import { render, Component, h } from 'preact';
+import { render, h } from 'preact';
 import createHistory from 'history/createBrowserHistory';
 
+import PureComponent from './utils/pureComponent';
 import routes from './routes';
 import createRouter from './router';
 
 const root = document.getElementById('root');
-const history = (window.h = createHistory());
-const router = createRouter(routes);
 window.webpackManifest = JSON.parse(root.getAttribute('data-manifest'));
-root.removeAttribute('data-manifest');
+const history = createHistory();
+const router = createRouter(routes);
 history.listen(() => init());
 
-const init = () => {
+const init = () =>
   router.match(history.location.pathname).then(({ Page, props }) => {
     render(
       <WithContext>
@@ -22,9 +22,8 @@ const init = () => {
     );
     return root;
   });
-};
 
-class WithContext extends Component {
+class WithContext extends PureComponent {
   getChildContext() {
     return { history };
   }
