@@ -12,16 +12,16 @@ const router = createRouter(routes);
 history.listen(() => init());
 
 const init = () =>
-  router.match(history.location.pathname).then(({ Page, props }) => {
-    render(
-      <WithContext>
-        <Page {...props} history={history} />
-      </WithContext>,
-      root,
-      root.lastChild
+  router.match(history.location.pathname)
+    .then(({ Page, props }) =>
+      render(
+        <WithContext>
+          <Page {...props} history={history} />
+        </WithContext>,
+        root,
+        root.lastChild
+      )
     );
-    return root;
-  });
 
 class WithContext extends PureComponent {
   getChildContext() {
