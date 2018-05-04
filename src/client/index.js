@@ -15,8 +15,8 @@ const init = () =>
   router.match(history.location.pathname)
     .then(({ Page, props }) =>
       render(
-        <WithContext>
-          <Page {...props} history={history} />
+        <WithContext {...{ history }}>
+          <Page {...{ ...props }} />
         </WithContext>,
         root,
         root.lastChild
@@ -25,10 +25,11 @@ const init = () =>
 
 class WithContext extends PureComponent {
   getChildContext() {
-    return { history };
+    const { children, ...context } = this.props;
+    return context;
   }
   render({ children }) {
-    return children[0];
+    return (children && children[0] || null);
   }
 }
 

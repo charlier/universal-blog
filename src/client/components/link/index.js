@@ -1,11 +1,11 @@
 import { h } from 'preact';
 
-export default (props, context) => (
+export default (props, { history }) => (
   <a
     {...props}
     onClick={(e) => {
       e.preventDefault();
-      context.history.push(props.href);
+      history.push(props.href);
     }}
   >
     {props.children}
