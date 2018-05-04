@@ -1,7 +1,6 @@
 import { h } from 'preact';
 import { shallow, deep } from 'preact-render-spy';
-import Provider from 'preact-context-provider';
-
+import Provider from '../../../src/client/utils/provider';
 import Link from '../../../src/client/components/link';
 
 describe('Link Component', () => {
