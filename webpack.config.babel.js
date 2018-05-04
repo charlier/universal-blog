@@ -52,7 +52,7 @@ const commonOptimizations = {
       uglifyOptions: { sourceMap: !isProd }
     })
   ]
-}
+};
 
 const mode = (isProd ? 'production' : 'development');
 
@@ -113,4 +113,4 @@ module.exports = [
       whitelist: /\.css$/
     })
   }
-]
+];
