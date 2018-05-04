@@ -1,6 +1,6 @@
 import { h } from 'preact';
 
-export default (props, { history }) => (
+const Link = (props, { history }) => (
   <a
     {...props}
     onClick={(e) => {
@@ -11,3 +11,5 @@ export default (props, { history }) => (
     {props.children}
   </a>
 );
+
+export default Link;

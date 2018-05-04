@@ -1,7 +1,7 @@
 import ptr from 'path-to-regexp';
 import 'isomorphic-unfetch';
 
-export default (routes) => {
+const Router = (routes) => {
   const parsedRoutes = routes.map((r) => {
     const keys = [];
     const re = ptr(r.path, keys);
@@ -51,3 +51,5 @@ export default (routes) => {
     }
   };
 };
+
+export default Router;

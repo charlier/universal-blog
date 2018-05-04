@@ -3,7 +3,7 @@ import Helmet from 'preact-helmet';
 
 import Link from '../link';
 
-export default ({ children }) => (
+const App = ({ children }) => (
   <div>
     <Helmet title='Title not set :('
       titleTemplate='charlie.im - %s'
@@ -41,3 +41,5 @@ export default ({ children }) => (
     </footer>
   </div>
 );
+
+export default App;

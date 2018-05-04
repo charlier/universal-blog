@@ -3,7 +3,7 @@ import Helmet from 'preact-helmet';
 
 import App from '../components/app';
 
-export default () => (
+const Home = () => (
   <App>
     <Helmet title="My Title" />
     <h1>charlie.im</h1>
@@ -19,3 +19,5 @@ export default () => (
     </p>
   </App>
 );
+
+export default Home;
