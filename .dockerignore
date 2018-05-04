@@ -1,3 +1,5 @@
-node_modules/
-dist/
-coverage/
+.git
+coverage
+dist
+node_modules
+README.md
