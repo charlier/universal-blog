@@ -70,7 +70,7 @@
     "babel-preset-stage-0": "^6.24.1",
     "babel-register": "^6.26.0",
     "babel-runtime": "^6.26.0",
-    "chunk-manifest-webpack-plugin": "github:malectro/chunk-manifest-webpack-plugin#webpack-4",
+    "chunk-manifest-webpack-plugin": "github:rbinsztock/chunk-manifest-webpack-plugin#updateWebpack4",
     "eslint": "^4.19.1",
     "eslint-config-iplayer-jsx": "^4.0.0",
     "eslint-plugin-jest": "^21.15.1",
