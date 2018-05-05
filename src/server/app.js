@@ -10,11 +10,17 @@ const request = ({ url }, res) =>
     .match(url)
     .then(({ chunkName, Page, props }) =>
       res.status(200).send(
-        render(html({
-          chunkName,
-          Page,
-          props
-        }))
+        `<!doctype html>${
+          render(
+            html(
+              {
+                chunkName,
+                Page,
+                props
+              }
+            )
+          )
+        }`
       )
     )
     .catch((e) => res.status(404).send(e.message));
