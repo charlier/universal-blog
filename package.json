@@ -5,10 +5,11 @@
   "scripts": {
     "prebuild": "mkdirp dist",
     "build": "NODE_ENV=production webpack -p",
-    "server": "node dist/server/index.js",
+    "run": "node dist/server/index.js",
     "compile": "webpack -w",
+    "dev": "nodemon -w dist dist/server/index.js",
     "prestart": "npm run -s prebuild && NODE_ENV=development webpack -p",
-    "start": "run-p server compile",
+    "start": "run-p dev compile",
     "test": "npm run -s test:lint && npm run -s test:coverage",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --notify",
