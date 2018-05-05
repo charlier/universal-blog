@@ -5,7 +5,7 @@
   "scripts": {
     "prebuild": "mkdirp dist",
     "build": "NODE_ENV=production webpack -p",
-    "run": "node dist/server/index.js",
+    "server": "node dist/server/index.js",
     "compile": "webpack -w",
     "dev": "nodemon -w dist dist/server/index.js",
     "prestart": "npm run -s prebuild && NODE_ENV=development webpack -p",
