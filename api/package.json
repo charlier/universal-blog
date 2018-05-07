@@ -1,0 +1,44 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon -w src --exec \"babel-node src\"",
+    "build": "babel src -s -D -d dist",
+    "start": "node dist",
+    "prestart": "npm run -s build",
+    "test": "eslint src"
+  },
+  "author": "",
+  "license": "ISC",
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "parserOptions": {
+      "ecmaVersion": 7,
+      "sourceType": "module"
+    },
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "no-console": 0,
+      "no-unused-vars": 1
+    }
+  },
+  "dependencies": {
+    "compression": "^1.7.2",
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "morgan": "^1.9.0",
+    "redis": "^2.8.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "eslint": "^4.19.1",
+    "nodemon": "^1.17.3"
+  }
+}

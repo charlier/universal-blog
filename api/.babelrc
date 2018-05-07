@@ -1,0 +1,8 @@
+{
+	"sourceMaps": true,
+	"presets": [
+		["env", { "loose":true }],
+		"stage-0"
+	],
+	"plugins": []
+}
