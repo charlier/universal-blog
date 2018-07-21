@@ -6,9 +6,9 @@ import Link from '../link';
 const App = ({ children }) => (
   <div>
     <Helmet
-      htmlAttributes={[
+      htmlAttributes={
         { name: 'lang', content: 'en-GB' }
-      ]}
+      }
       title='Title not set :('
       titleTemplate='charlie.im - %s'
       meta={[
